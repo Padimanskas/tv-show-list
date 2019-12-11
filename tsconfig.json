@@ -17,6 +17,25 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@env/*": ["src/environments/*"],
+      "@core/*": ["src/app/core/*"],
+      "@interceptors/*": ["src/app/core/interceptors/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@guards/*": ["src/app/core/guards/*"],
+      "@singleInstanceComponents/*": ["src/app/core/components/*"],
+
+      "@shared/*": ["src/app/shared/*"],
+      "@sharedComponents/*": ["src/app/shared/components/*"],
+      "@sharedInterfaces/*": ["src/app/shared/interfaces/*"],
+      "@sharedModules/*": ["src/app/shared/modules/*"],
+
+      "@modules/*": ["src/app/modules/*"],
+
+
+      "@auth/*": ["src/app/core/components/auth/*"]
+    }
   }
 }

@@ -1,0 +1,11 @@
+:host {
+  .sort-button {
+    cursor: pointer;
+    &.up-arrow {
+      color: red;
+    }
+    &.down-arrow {
+      color: blue;
+    }
+  }
+}

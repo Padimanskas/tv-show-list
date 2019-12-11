@@ -1,0 +1,19 @@
+:host {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  .divTableHeading {
+    background-color: #eee;
+    display: table-header-group;
+    font-weight: bold;
+  }
+  .divTableBody {
+    display: table-row-group;
+  }
+  .divTableFoot {
+    background-color: #eee;
+    display: table-footer-group;
+    font-weight: bold;
+  }
+}

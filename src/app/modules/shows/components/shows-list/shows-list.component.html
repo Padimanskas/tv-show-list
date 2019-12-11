@@ -1,0 +1,20 @@
+<div-table>
+
+  <table-head>Name <sort-button [fieldName]="'show.name'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
+  <table-head>Season</table-head>
+  <table-head>Network</table-head>
+  <table-head>Premiere <sort-button [fieldName]="'show.premiereDate'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
+
+  <list-row *ngFor="let show of shows$ | async |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (totalShows$ | async) }">
+    <table-cell><p>{{show.name}}</p><p>{{show.genre}}</p></table-cell>
+    <table-cell>{{show.season}}</table-cell>
+    <table-cell>{{show.network}}</table-cell>
+    <table-cell>{{show.premiereDate | date: 'dd/MM/yyyy'}}</table-cell>
+  </list-row>
+
+</div-table>
+
+<pagination-controls (pageChange)="onChangePage($event)"></pagination-controls>
+<button (click)="changeItemsCountOnPage(3)">3</button>
+<button (click)="changeItemsCountOnPage(5)">5</button>
+<button (click)="changeItemsCountOnPage(10)">10</button>

@@ -1,0 +1,22 @@
+@mixin flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column-order {
+  flex-direction: column;
+}
+
+@mixin border-box-sizing($padding) {
+  box-sizing: border-box;
+  padding: $padding + px;
+}
+
+@mixin show-borders {
+  //border: 1px solid red;
+}
+
+@mixin reset-link-style {
+  color: #000;
+  text-decoration: none;
+}

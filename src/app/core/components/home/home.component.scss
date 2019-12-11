@@ -1,0 +1,18 @@
+@import "flexbox-polyfill";
+
+.wrapper {
+  @include flex;
+  height: 100vh;
+  background: #ccc;
+  flex-direction: column;
+  .content {
+    @include flex;
+    @include flex-grow(1);
+    background: #999;
+    color: #000;
+    .columns {
+      @include flex;
+      @include flex-grow(1);
+    }
+  }
+}

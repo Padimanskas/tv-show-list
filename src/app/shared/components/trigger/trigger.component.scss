@@ -1,0 +1,43 @@
+:host {
+  .checkbox {
+    display: none;
+    & + .trigger {
+      position: relative;
+      width: 35px;
+      height: 15px;
+      border-radius: 50px;
+      &:before {
+        content: "";
+        position: absolute;
+        width: 35px;
+        height: 16px;
+        border-radius: 50px;
+        background: #d8d8d8;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        border-radius: 100%;
+        width: 22px;
+        height: 22px;
+        background-color: #ff5722;
+        top: -3px;
+        transition: transform .1s;
+      }
+    }
+    &:checked {
+      & + label:after {
+        background-color: #ff5722;
+        transform: translateX(15px);
+      }
+      & + label:before {
+        background: #ffaa8f;
+      }
+    }
+    &:not(:checked) + label:after {
+      background-color: #f1f1f1;
+      transform: translateX(0px);
+    }
+  }
+}

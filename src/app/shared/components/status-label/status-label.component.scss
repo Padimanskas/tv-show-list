@@ -1,0 +1,16 @@
+:host {
+  .is-enabled {
+    padding: 5px 15px 5px 17px;
+    border-radius: 50px;
+    background-color: #535353;
+    color: #FFF;
+    font-family: sans-serif;
+    font-size: 90%;
+  }
+
+  .is-disabled {
+    @extend .is-enabled;
+    background-color: #9F9F9F;
+  }
+}
+

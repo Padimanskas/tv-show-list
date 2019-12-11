@@ -1,0 +1,28 @@
+@mixin flex {
+  display: -webkit-box;               /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;                  /* OLD - Firefox 19- (doesn't work very well) */
+  display: -ms-flexbox;               /* TWEENER - IE 10 */
+  display: -webkit-flex;              /* NEW - Chrome */
+  display: flex;                      /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-grow($num) {
+  -webkit-box-flex: $num;             /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $num;                /* OLD - Firefox 19- */
+  -webkit-flex: $num;                 /* Chrome */
+  -ms-flex: $num;                     /* IE 10 */
+  flex: $num;                         /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-order($num) {
+  -webkit-box-ordinal-group: $num;    /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: $num;       /* OLD - Firefox 19- */
+  -ms-flex-order: $num;               /* TWEENER - IE 10 */
+  -webkit-order: $num;                /* NEW - Chrome */
+  order: $num;                        /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-space-between() {
+  justify-content: space-between;
+  align-items: center;
+}
