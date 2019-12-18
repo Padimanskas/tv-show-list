@@ -26,11 +26,7 @@ export interface IActionWithPayload extends Action {
 export enum EShowActionTypes {
   GetShows = '[Shows API] Get Shows',
   ShowsLoadedSuccess = '[Shows API] Shows Loaded Success',
-  ShowsLoadedError = '[Shows API] Shows Loaded Error',
-  ApplySort = '[Shows API] Apply Sort',
-  SortingComplete = '[Shows API] Sorting Complete',
-  ApplyFilter = '[Shows API] Apply Filter',
-  FilterComplete = '[Shows API] Filter Complete'
+  ShowsLoadedError = '[Shows API] Shows Loaded Error'
 }
 
 export class GetShows implements Action {

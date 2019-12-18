@@ -7,7 +7,6 @@ import { DivTableComponent } from '@shared/components/div-table/div-table.compon
 import { TableHeadComponent } from '@shared/components/table-head/table-head.component';
 import { ListRowComponent } from '@shared/components/list-row/list-row.component';
 import { TableCellComponent } from '@shared/components/table-cell/table-cell.component';
-import { StatusLabelComponent } from '@shared/components/status-label/status-label.component';
 import { SortButtonComponent } from './components/sort-button/sort-button.component';
 import { RectButtonComponent } from './components/rect-button/rect-button.component';
 import { ButtonListComponent } from './components/button-list/button-list.component';
@@ -18,7 +17,6 @@ import { DropDownDateListComponent } from './components/drop-down-date-list/drop
 @NgModule({
   declarations: [
     ListRowComponent,
-    StatusLabelComponent,
     TableCellComponent,
     DivTableComponent,
     TableHeadComponent,
@@ -37,7 +35,6 @@ import { DropDownDateListComponent } from './components/drop-down-date-list/drop
   exports: [
 
     ListRowComponent,
-    StatusLabelComponent,
     TableCellComponent,
     DivTableComponent,
     TableHeadComponent,
