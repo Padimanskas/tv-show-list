@@ -98,25 +98,6 @@ export class ShowsService {
     status: 'OK'
   };
 
-  private sortResponse(sortDirection) {
-    const sortFieldName = sortDirection[0] ? sortDirection[0][0].split('.')[1] : 'id';
-    const sortFieldDir = sortDirection.length ? sortDirection[0][1] : 'ASC';
-    this.showsResponse.payload.sort = [sortDirection];
-    this.showsResponse.payload.content = this.showsResponse.payload.content.sort((a, b) => {
-
-      if (sortFieldDir === 'ASC') {
-        if (a[sortFieldName] instanceof Date) return a[sortFieldName].localeCompare(b[sortFieldName]);
-        return a[sortFieldName].toString().localeCompare(b[sortFieldName].toString());
-      }
-      if (sortFieldDir === 'DESC') {
-        if (a[sortFieldName] instanceof Date) return b[sortFieldName].localeCompare(a[sortFieldName]);
-        return b[sortFieldName].toString().localeCompare(a[sortFieldName].toString());
-      }
-      return a[sortFieldName].toString().localeCompare(b[sortFieldName].toString());
-    });
-  }
-
-
   public getShows(): Observable<IShowResponse> {
     return Observable.create(observer => {
       setTimeout(() => {

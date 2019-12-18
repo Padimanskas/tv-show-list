@@ -7,13 +7,5 @@ export interface IShowState {
 export const initialShowState: IShowState = {
   shows: <IShowPayload>{
     content: [],
-    filter: {},
-    first: true,
-    last: false,
-    number: 0,
-    size: 5,
-    sort: {},
-    totalElements: 0,
-    totalPages: 0
   }
 };

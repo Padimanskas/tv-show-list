@@ -7,14 +7,6 @@ interface ICommonResponseStatus {
 
 export interface ICommonPayload {
   content: TContent;
-  filter: object;
-  first: boolean;
-  last: boolean;
-  number: number;
-  size: number;
-  sort: string[][];
-  totalElements: number;
-  totalPages: number;
 }
 
 export interface ICommonResponseBody {

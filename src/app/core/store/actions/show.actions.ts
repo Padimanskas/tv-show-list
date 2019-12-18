@@ -51,28 +51,4 @@ export class ShowsLoadedError implements IActionWithPayload {
   constructor(public payload: IShowResponse | HttpErrorResponse) {}
 }
 
-export class ApplySort implements IActionWithPayload {
-  public readonly type = EShowActionTypes.ApplySort;
-
-  constructor(public payload: ISortPayload) {}
-}
-
-export class SortingComplete implements IActionWithPayload {
-  public readonly type = EShowActionTypes.SortingComplete;
-
-  constructor(public payload: IShow[]) {}
-}
-
-export class ApplyFilter implements IActionWithPayload {
-  public readonly type = EShowActionTypes.ApplyFilter;
-
-  constructor(public payload: IFilterPayload) {}
-}
-
-export class FilterComplete implements IActionWithPayload {
-  public readonly type = EShowActionTypes.FilterComplete;
-
-  constructor(public payload: IShow[]) {}
-}
-
-export type ShowsActions = GetShows | ShowsLoadedSuccess | ShowsLoadedError | ApplySort | SortingComplete |  ApplyFilter | FilterComplete;
+export type ShowsActions = GetShows | ShowsLoadedSuccess | ShowsLoadedError;

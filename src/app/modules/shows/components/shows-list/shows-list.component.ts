@@ -62,13 +62,14 @@ export class ShowsListComponent implements OnInit {
     this.filteredShows$ = this.shows$.pipe(
       map(shows =>
         this.filters.reduce((cumulShows, field) =>
-          cumulShows.filter(singleItem => singleItem[field.fieldName].toString().toLowerCase().includes(field.fieldValue.toString().toLowerCase())
+          cumulShows.filter(singleItem =>
+            singleItem[field.fieldName].toString().toLowerCase().includes(field.fieldValue.toString().toLowerCase())
           ), shows)
       ));
   }
 
   public addSortField(sortPayload: ISortPayload): void {
-    const { fieldName, group, sortDirection } = sortPayload;
+    const { fieldName, group } = sortPayload;
     this.filteredShows$ = processSorting(sortPayload, this.filteredShows$);
     if (!group) this.resetSortButtonsExcept(fieldName);
   }
