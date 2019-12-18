@@ -19,12 +19,9 @@ import { MainPageComponent } from '@core/components/main-page/main-page.componen
 import { HomeComponent } from '@core/components/home/home.component';
 import { ErrorPageComponent } from '@core/components/error-page/error-page.component';
 
-// pipes
-import { GetRouterNamePipe } from '@core/pipes/get-router-name.pipe';
-
 // services
 import { ResponseHandlingHelper } from '@core/store/helpers/response-handling.helper';
-import {ShowEffects} from "@core/store/effects/show.effects";
+import {ShowEffects} from '@core/store/effects/show.effects';
 
 
 @NgModule({
@@ -32,8 +29,7 @@ import {ShowEffects} from "@core/store/effects/show.effects";
     MainContentComponent,
     MainPageComponent,
     HomeComponent,
-    GetRouterNamePipe,
-    ErrorPageComponent
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

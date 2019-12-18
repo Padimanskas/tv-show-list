@@ -74,6 +74,14 @@ export class ShowsService {
           season: 1,
           premiereDate: new Date('01/07/2011')
         },
+        {
+          id: 7,
+          name: 'The Terror Terror Terror',
+          network: 'Netflix',
+          genre: 'drama',
+          season: 5,
+          premiereDate: new Date('01/07/2011')
+        },
       ],
       filter: {},
       first: true,
@@ -95,10 +103,13 @@ export class ShowsService {
     const sortFieldDir = sortDirection.length ? sortDirection[0][1] : 'ASC';
     this.showsResponse.payload.sort = [sortDirection];
     this.showsResponse.payload.content = this.showsResponse.payload.content.sort((a, b) => {
+
       if (sortFieldDir === 'ASC') {
+        if (a[sortFieldName] instanceof Date) return a[sortFieldName].localeCompare(b[sortFieldName]);
         return a[sortFieldName].toString().localeCompare(b[sortFieldName].toString());
       }
       if (sortFieldDir === 'DESC') {
+        if (a[sortFieldName] instanceof Date) return b[sortFieldName].localeCompare(a[sortFieldName]);
         return b[sortFieldName].toString().localeCompare(a[sortFieldName].toString());
       }
       return a[sortFieldName].toString().localeCompare(b[sortFieldName].toString());
@@ -106,8 +117,7 @@ export class ShowsService {
   }
 
 
-  public getShows(page: string, count: string, sort: any): Observable<IShowResponse> {
-    this.sortResponse(sort);
+  public getShows(): Observable<IShowResponse> {
     return Observable.create(observer => {
       setTimeout(() => {
         observer.next(this.showsResponse);

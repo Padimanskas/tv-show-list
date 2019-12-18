@@ -1,11 +1,18 @@
+<filter-bar>
+
+  <live-search-input [fieldName]="'name'" (onInput)="filterShows($event)"></live-search-input>
+  <drop-down-list [items]="genres | async" (onSelectItem)="filterShows({fieldName: 'genre', fieldValue: $event})"></drop-down-list>
+  <drop-down-date-list [items]="dates | async" (onSelectItem)="filterShows({fieldName: 'premiereDate', fieldValue: $event })"></drop-down-date-list>
+
+</filter-bar>
 <div-table>
 
-  <table-head>Name <sort-button [fieldName]="'show.name'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
+  <table-head>Name <sort-button [fieldName]="'name'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
   <table-head>Season</table-head>
   <table-head>Network</table-head>
-  <table-head>Premiere <sort-button [fieldName]="'show.premiereDate'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
+  <table-head>Premiere <sort-button [fieldName]="'premiereDate'" (onDirectionChanged)="addSortField($event)"></sort-button></table-head>
 
-  <list-row *ngFor="let show of shows$ | async |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (totalShows$ | async) }">
+  <list-row *ngFor="let show of filteredShows$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
     <table-cell><p>{{show.name}}</p><p>{{show.genre}}</p></table-cell>
     <table-cell>{{show.season}}</table-cell>
     <table-cell>{{show.network}}</table-cell>
@@ -14,7 +21,7 @@
 
 </div-table>
 
-<pagination-controls (pageChange)="onChangePage($event)"></pagination-controls>
-<button (click)="changeItemsCountOnPage(3)">3</button>
-<button (click)="changeItemsCountOnPage(5)">5</button>
-<button (click)="changeItemsCountOnPage(10)">10</button>
+<div class="pagination-controls-wrapper">
+  <pagination-controls (pageChange)="onChangePage($event)" class="my-pagination"></pagination-controls>
+  <button-list [style]="{alignSelf: 'flex-end'}" (onClick)="changeItemsCountOnPage($event)"></button-list>
+</div>

@@ -1,0 +1,15 @@
+:host {
+  .rectButton {
+    background-color: rgba(0,0,0,0);
+    color: #000000;
+    display: inline-block;
+    border: none;
+    padding: 20px;
+    margin: 0;
+    outline: none;
+    &.active {
+      background-color: #F39A4A;
+      color: #FFFFFF;
+    }
+  }
+}

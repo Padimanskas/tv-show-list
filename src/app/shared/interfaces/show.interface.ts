@@ -12,6 +12,11 @@ export interface IShowPayload extends ICommonPayload {
   content: IShow[];
 }
 
+export interface IFilterFieldParams {
+  fieldName: string;
+  fieldValue: string;
+}
+
 export interface IShow {
   id: number;
   name: string;

@@ -12,7 +12,7 @@ export const initialShowState: IShowState = {
     last: false,
     number: 0,
     size: 5,
-    sort: [],
+    sort: {},
     totalElements: 0,
     totalPages: 0
   }

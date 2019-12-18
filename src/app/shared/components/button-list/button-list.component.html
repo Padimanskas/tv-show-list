@@ -1,0 +1,3 @@
+<ng-container *ngFor="let button of buttons">
+  <rect-button  [caption]="button.label" [active]="button.active" (click)="changeItemsCountOnPage(button)"></rect-button>
+</ng-container>

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
-import { IShowPayload, IShowResponse } from '@shared/interfaces/show.interface';
+import {IShow, IShowPayload, IShowResponse} from '@shared/interfaces/show.interface';
 
 export interface IHttpRequestParams {
   page: string;
@@ -14,8 +14,13 @@ export interface ISortPayload {
   group: boolean;
 }
 
+export interface IFilterPayload {
+  fieldName: string;
+  filterQuery: string;
+}
+
 export interface IActionWithPayload extends Action {
-  payload?: IShowPayload | IShowResponse | HttpErrorResponse | IHttpRequestParams | ISortPayload;
+  payload?: IShowPayload | IShowResponse | HttpErrorResponse | IHttpRequestParams | ISortPayload | IFilterPayload | IShow[];
 }
 
 export enum EShowActionTypes {
@@ -23,30 +28,51 @@ export enum EShowActionTypes {
   ShowsLoadedSuccess = '[Shows API] Shows Loaded Success',
   ShowsLoadedError = '[Shows API] Shows Loaded Error',
   ApplySort = '[Shows API] Apply Sort',
+  SortingComplete = '[Shows API] Sorting Complete',
+  ApplyFilter = '[Shows API] Apply Filter',
+  FilterComplete = '[Shows API] Filter Complete'
 }
 
-export class GetShows implements IActionWithPayload {
-  public readonly type = <string>EShowActionTypes.GetShows;
+export class GetShows implements Action {
+  public readonly type = EShowActionTypes.GetShows;
 
-  constructor(public payload: IHttpRequestParams) {}
+  constructor(public payload?: any) {}
 }
 
 export class ShowsLoadedSuccess implements IActionWithPayload {
-  public readonly type = <string>EShowActionTypes.ShowsLoadedSuccess;
+  public readonly type = EShowActionTypes.ShowsLoadedSuccess;
 
   constructor(public payload: IShowPayload) {}
 }
 
 export class ShowsLoadedError implements IActionWithPayload {
-  public readonly type = <string>EShowActionTypes.ShowsLoadedError;
+  public readonly type = EShowActionTypes.ShowsLoadedError;
 
   constructor(public payload: IShowResponse | HttpErrorResponse) {}
 }
 
 export class ApplySort implements IActionWithPayload {
-  public readonly type = <string>EShowActionTypes.ApplySort;
+  public readonly type = EShowActionTypes.ApplySort;
 
   constructor(public payload: ISortPayload) {}
 }
 
-export type ShowsActions = GetShows | ShowsLoadedSuccess | ShowsLoadedError | ApplySort;
+export class SortingComplete implements IActionWithPayload {
+  public readonly type = EShowActionTypes.SortingComplete;
+
+  constructor(public payload: IShow[]) {}
+}
+
+export class ApplyFilter implements IActionWithPayload {
+  public readonly type = EShowActionTypes.ApplyFilter;
+
+  constructor(public payload: IFilterPayload) {}
+}
+
+export class FilterComplete implements IActionWithPayload {
+  public readonly type = EShowActionTypes.FilterComplete;
+
+  constructor(public payload: IShow[]) {}
+}
+
+export type ShowsActions = GetShows | ShowsLoadedSuccess | ShowsLoadedError | ApplySort | SortingComplete |  ApplyFilter | FilterComplete;

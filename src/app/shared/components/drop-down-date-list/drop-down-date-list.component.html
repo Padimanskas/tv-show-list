@@ -1,0 +1,5 @@
+<select (change)="onSelect($event.target.value)" [(ngModel)]="selectedItem">
+  <option *ngFor="let item of items" value={{item}}>
+    {{item | date: 'dd/MM/yyyy'}}
+  </option>
+</select>

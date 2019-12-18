@@ -1,0 +1,54 @@
+/*
+.my-pagination /deep/ .ngx-pagination .pagination-previous {
+  &:before {
+    content: '';
+    height: 10px;
+    width: 10px;
+    border: 2px solid #000;
+    border-top: 0;
+    border-right: 0;
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+  & > span > span {
+    display: none;
+  }
+  & > a > span {
+    display: none;
+  }
+}
+
+
+.my-pagination /deep/ .ngx-pagination .pagination-next {
+  &:after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    border: 2px solid #000;
+    border-bottom: 0;
+    border-left: 0;
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+  & > span > span {
+    display: none;
+
+  }
+  & > a > span {
+    display: none;
+
+  }
+}
+*/
+
+.my-pagination {
+  display: inline-flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.pagination-controls-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

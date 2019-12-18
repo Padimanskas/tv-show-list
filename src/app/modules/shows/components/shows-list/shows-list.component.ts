@@ -1,12 +1,13 @@
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import { Modal } from '@crystalui/angular-modal';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { IAppState } from '@core/store/state/app.state';
 import { Observable } from 'rxjs';
 import { IShow } from '@shared/interfaces/show.interface';
-import { ApplySort, GetShows, ISortPayload } from '@core/store/actions/show.actions';
+import { GetShows, ISortPayload } from '@core/store/actions/show.actions';
 import { SortButtonComponent } from '@shared/components/sort-button/sort-button.component';
-
+import { map } from 'rxjs/operators';
+import { processSorting } from '@core/store/helpers/process-sorting.helper';
+import { IFilterFieldParams } from '@sharedInterfaces/show.interface';
 
 @Component({
   selector: 'shows-list',
@@ -17,28 +18,59 @@ export class ShowsListComponent implements OnInit {
 
   @ViewChildren(SortButtonComponent) sortButtons: QueryList<SortButtonComponent>;
 
-  @Input() itemsPerPage: number = 5;
+  public itemsPerPage: number = 5;
   public currentPage: number = 0;
-
   public shows$: Observable<IShow[]> = this.store.pipe(select(state => state.shows.shows.content));
-  public totalShows$: Observable<number> = this.store.pipe(select(state => state.shows.shows.content.length));
+  public filteredShows$: Observable<IShow[]>;
+  public filters: IFilterFieldParams[] = [];
+  public dates: Observable<Date[]>;
+  public genres: Observable<string[]>;
 
-  constructor(private store: Store<IAppState>) {
-  }
+  @ViewChildren('someVar') filteredItems;
+
+  constructor(private store: Store<IAppState>) { }
 
   ngOnInit() {
     this.getShowsPage(0);
+    this.filteredShows$ = this.shows$.pipe(map((shows) => shows));
+    this.dates = this.extractDataFromShows('premiereDate');
+    this.genres = this.extractDataFromShows('genre');
+  }
+
+  extractDataFromShows(fieldName: string): Observable<any>  {
+    return this.shows$.pipe(
+      map(shows => this.getUnique(shows.map(show => show[fieldName])))
+    );
+  }
+
+  getUnique(arr: any[]) {
+    return arr.filter((item, id, self) => self.indexOf(item) === id);
+  }
+
+  public filterShows(newFilter) {
+    const searchResult = this.filters.find(filter => filter.fieldName === newFilter.fieldName);
+
+    if (!searchResult) this.filters.push(newFilter);
+
+    this.filters = this.filters.map(filter => {
+      if (filter.fieldName === newFilter.fieldName) {
+        return newFilter;
+      }
+      return filter;
+    });
+
+    this.filteredShows$ = this.shows$.pipe(
+      map(shows =>
+        this.filters.reduce((cumulShows, field) =>
+          cumulShows.filter(singleItem => singleItem[field.fieldName].toString().toLowerCase().includes(field.fieldValue.toString().toLowerCase())
+          ), shows)
+      ));
   }
 
   public addSortField(sortPayload: ISortPayload): void {
-    const { fieldName, group } = sortPayload;
-    this.store.dispatch(new ApplySort(sortPayload));
-    this.getShowsPage(this.checkIsFirstPage() ? this.currentPage - 1 : this.currentPage);
+    const { fieldName, group, sortDirection } = sortPayload;
+    this.filteredShows$ = processSorting(sortPayload, this.filteredShows$);
     if (!group) this.resetSortButtonsExcept(fieldName);
-  }
-
-  private checkIsFirstPage(): boolean {
-    return !!this.currentPage;
   }
 
   private resetSortButtonsExcept(fieldName: string): void {
@@ -48,12 +80,11 @@ export class ShowsListComponent implements OnInit {
   }
 
   private getShowsPage(pageNumber: number): void {
-    this.store.dispatch(new GetShows({ page: `${pageNumber}`, count: `${this.itemsPerPage}`, sort: [] }));
+    this.store.dispatch(new GetShows());
   }
 
   public onChangePage(pageNumber: number): void {
     this.currentPage = pageNumber;
-    this.getShowsPage(this.currentPage - 1);
   }
 
   public changeItemsCountOnPage(itemsPerPage): void {
